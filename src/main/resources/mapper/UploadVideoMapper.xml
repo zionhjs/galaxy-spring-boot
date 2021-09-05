@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.galaxy.project.dao.UploadVideoMapper">
+  <resultMap id="BaseResultMap" type="com.galaxy.project.model.Video">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="video_name" jdbcType="VARCHAR" property="videoName" />
+    <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
+    <result column="content_type" jdbcType="VARCHAR" property="contentType" />
+    <result column="size" jdbcType="BIGINT" property="size" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="suffix" jdbcType="VARCHAR" property="suffix" />
+    <result column="s3_bucket_name" jdbcType="VARCHAR" property="s3BucketName" />
+    <result column="s3_key_480" jdbcType="VARCHAR" property="s3Key480" />
+    <result column="s3_key_1080" jdbcType="VARCHAR" property="s3Key1080" />
+    <result column="s3_key_2160" jdbcType="VARCHAR" property="s3Key2160" />
+    <result column="object_url_480" jdbcType="VARCHAR" property="objectUrl480" />
+    <result column="object_url_1080" jdbcType="VARCHAR" property="objectUrl1080" />
+    <result column="object_url_2160" jdbcType="VARCHAR" property="objectUrl2160" />
+    <result column="frame_images" jdbcType="VARCHAR" property="frameImages" />
+  </resultMap>
+
+    <select id="list" resultType="com.galaxy.project.model.Video" >
+        select  id as id,created_at as createdAt,created_by as createdBy,updated_at as updatedAt,
+                 updated_by as updatedBy,status as status,title as title,description as description,video_name as videoName,
+                 thumbnail as thumbnail,content_type as contentType,
+                 size as size,level as level,suffix as suffix,
+                 s3_bucket_name as s3BucketName,s3_key_480 as s3Key480,s3_key_1080 as s3Key1080,s3_key_2160 as s3Key2160,
+                 object_url_480 as objectUrl480,object_url_1080 as objectUrl1080,object_url_2160 as objectUrl2160,
+                 frame_images as frameImages,status_name as statusName
+        from t_video
+        where is_delete = 0
+        <if test="status != null and status != '' and status !={} ">
+            and status = #{status}
+        </if>
+        <if test="statusName != null and statusName != ''">
+            and status_name = #{statusName}
+        </if>
+        <if test="level != null and level != ''">
+            and level = #{level}
+        </if>
+        <if test="title != null and title != '' and title !={} ">
+            and title like concat(concat('%',#{title}),'%')
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.galaxy.project.dao.CmsBlogMapper">
+  <resultMap id="BaseResultMap" type="com.galaxy.project.model.Blog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="like_num" jdbcType="BIGINT" property="likeNum" />
+    <result column="browse_num" jdbcType="BIGINT" property="browseNum" />
+    <result column="tag_id" jdbcType="BIGINT" property="tagId" />
+    <result column="status_name" jdbcType="BIGINT" property="statusName" />
+  </resultMap>
+
+    <select id="getBlogCountById" resultType="java.lang.Integer">
+        select count(1)
+        from t_blog
+        where is_delete = 0
+        and id = #{id}
+    </select>
+
+    <select id="findByModalOrderByTime" resultType="com.galaxy.project.model.Blog">
+        select b.id as id,b.created_at as createdAt,b.created_by as createdBy,b.updated_at as updatedAt,
+        b.updated_by as updatedBy,b.title as title,b.author as author,b.content as content,
+        ifnull(b.like_num,0) as likeNum,ifnull(b.browse_num,0) as browseNum,b.tag_id as tagId,
+        b.tag_name as tagName
+        from t_blog b
+        where b.is_delete = 0
+        <if test="title != null and title != '' and title != '{}'">
+            and b.title LIKE concat(concat('%',#{title}),'%')
+        </if>
+        <if test="content != null and content != ''">
+            and b.content LIKE concat(concat('%',#{content}),'%')
+        </if>
+        order by b.created_at
+    </select>
+
+    <select id="list" resultType="com.galaxy.project.model.Blog">
+        select b.id as id,b.created_at as createdAt,b.created_by as createdBy,b.updated_at as updatedAt,
+                b.updated_by as updatedBy,b.title as title,b.author as author,b.content as content,
+                ifnull(b.like_num,0) as likeNum,ifnull(b.browse_num,0) as browseNum,b.tag_id as tagId,
+                b.tag_name as tagName
+        from t_blog b
+        where b.is_delete = 0
+        <if test="title != null and title != '' and title != '{}'">
+            and b.title LIKE concat(concat('%',#{title}),'%')
+        </if>
+        <if test="content != null and content != ''">
+            and b.content LIKE concat(concat('%',#{content}),'%')
+        </if>
+        <if test="tagName != null and tagName != '' and tagName != '{}'">
+            and find_in_set(#{tagName}, b.tag_name)
+        </if>
+    </select>
+
+    <update id="updateBlogBrowseNum">
+        update t_blog
+        set browse_num = ifnull(browse_num,0) + 1
+        where id = #{id}
+    </update>
+
+    <select id="detail" resultType="com.galaxy.project.model.Blog">
+        select b.id as id,b.created_at as createdAt,b.created_by as createdBy,b.updated_at as updatedAt,
+                b.updated_by as updatedBy,b.title as title,b.author as author,b.content as content,
+                ifnull(b.like_num,0) as likeNum,ifnull(b.browse_num,0) as browseNum,b.tag_id as tagId,
+                b.tag_name as tagName
+        from t_blog b
+        where b.is_delete = 0
+        and b.id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.galaxy.project.dao.CmsBlogImagesMapper">
+  <resultMap id="BaseResultMap" type="com.galaxy.project.model.BlogImages">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="blog_id" jdbcType="BIGINT" property="blogId" />
+  </resultMap>
+
+    <update id="deleteByUrl">
+        update t_blog_images
+        set is_delete = 1
+        where url = #{url}
+    </update>
+
+    <update id="batchDeleteBlogImages">
+        update t_blog_images
+        set is_delete = 1
+        where blog_id = #{blogId}
+    </update>
+
+    <select id="selectBlogImagesByBlogId" resultMap="BaseResultMap">
+        select id,created_at,created_by,updated_at,updated_by,status,url,blog_id
+        from t_blog_images
+        where is_delete = 0
+        and blog_id = #{blogId}
+    </select>
+
+</mapper>

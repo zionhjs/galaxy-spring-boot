@@ -1,0 +1,73 @@
+spring:
+  profiles:
+    active: dev
+  http:
+    multipart:
+      max-file-size: 100Mb
+      max-request-size: 100Mb
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  jackson:
+    serialization: {write-dates-as-timestamps: true}
+  # 数据源
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://47.100.17.12:3306/galaxy?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+  # REDIS (RedisProperties)
+  redis:
+    database: 0
+    timeout: 5000
+    # Redis服务器地址
+    host: 47.100.17.12
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 123456
+    # 连接池最大连接数（使用负值表示没有限制）
+    pool:
+      max-active: 8
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 8
+      # 连接池中的最小空闲连接
+      min-idle: 0
+
+# 文件地址
+file:
+  url: D:\\
+
+#解决缓存目录被系统清除的问题 稳定版暂未配置
+server:
+  tomcat:
+    basedir: ./tmp
+##自定义配置
+taskmagprops:
+  expireTime: 18000000
+  checkLoginUrl: /ucenter/user/login,/register,/logout,/detail,/findByModal,/findBackPasswor,/user/findByModal,/images/findByModal,/images/detail,/video/findByModal,/video/detail,/cms/team/detail,/cms/team/findByModal,/blog/homeFindByTitle,/email/sendQuery,/blog/findByModalOrderByTime,/url/redirect,/getInviteList,/getCategoryByParentId,/getUserListBySex,/error,/env/print,/swagger-ui.*,/static.*,/a2billing.*,/favicon.*,/webjars/springfox-swagger-ui.*,/v2/api-docs.*,/images/uploadImagesUrl
+  filedir: api-mag/
+  fileBasePath: upload/
+
+##远程自定义配置
+galaxy:
+  notCheckLoginUrl: /login,/register,/logout,/detail,/findByModal,/findBackPasswor,/user/findByModal,/images/findByModal,/images/detail,/video/findByModal,/video/detail,/cms/team/detail,/cms/team/findByModal,/blog/homeFindByTitle,/email/sendQuery,/blog/findByModalOrderByTime,/url/redirect,/getInviteList,/getCategoryByParentId,/getUserListBySex,/error,/env/print,/swagger-ui.*,/static.*,/a2billing.*,/favicon.*,/webjars/springfox-swagger-ui.*,/v2/api-docs.*,/images/uploadImagesUrl
+  amazonProperties:
+    accessKey: AKIA2AUK3NDS7MN4OCY4
+    secretKey: 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
+    region: us-west-1
+    cloudfront_DomainName: d18bri8sapzuu4.cloudfront.net
+    imageBucketName: galaxy-image
+    videoBucketName: galaxy-video
+    image360BucketName: galaxy360image
+    video360BucketName: galaxy360video
+
+logging:
+  level:
+    com:
+      company:
+        project:
+          dao: DEBUG
