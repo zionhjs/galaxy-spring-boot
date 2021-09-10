@@ -145,6 +145,9 @@ public class UploadImagesServiceImpl extends AbstractService<Images> implements 
             int wDiv = imgWidth/600;
             int hDiv = imgHeight/600;
             int div = (wDiv+hDiv)/2;
+            if (0 == div){
+                div = 1;
+            }
             // int div = 2;
             File small = changSmall(file,imgWidth/div,imgHeight/div);
 
