@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: openjdk8
+
+  build:
+    commands:
+      # - cd ./GalaxyChatbot
+      - echo current path is `pwd`
+      - echo current lst is `ls -list`
+      - echo build started at `date`
+      - openssl enc -d -aes-256-ecb -md md5 -in ./src/main/resources/application.yml.secrets -out ./src/main/resources/application.yml -k $SECRETS_KEY
+      - echo decrepted at `date`
+      - mvn install -DskipTests
+      - mvn clean install
+
+artifacts:
+  files:
+    - 'target/galaxyserver-0.0.1-SNAPSHOT.jar'
+    - 'src/main/resources/application.yml'
+    - 'appspec.yml'
+    - 'deploy/check.sh'
+    - 'deploy/install.sh'
+    - 'deploy/start.sh'
+    - 'deploy/stop.sh'
+  discard-paths: yes
+
+

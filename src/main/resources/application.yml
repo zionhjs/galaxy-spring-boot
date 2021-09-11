@@ -43,6 +43,7 @@ file:
 
 #解决缓存目录被系统清除的问题 稳定版暂未配置
 server:
+  port: 9400
   tomcat:
     basedir: ./tmp
 ##自定义配置
