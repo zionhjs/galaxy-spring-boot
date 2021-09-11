@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Service_name=galaxy-server
+Service_name=galaxy-spring-boot
 Docker_running=`sudo docker ps |sudo grep $Service_name|wc -l`
 
 if [ -n "$Docker_running" ];then

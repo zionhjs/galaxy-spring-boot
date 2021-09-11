@@ -3,7 +3,7 @@ HOME=/home/ec2-user
 
 WORK=/home/ec2-user/jar
 
-NAME=galaxy-server
+NAME=galaxy-spring-boot
 
 IMAGE_TAG=$(echo $RANDOM)
 
@@ -15,15 +15,15 @@ sudo mv *.jar $HOME/${NAME}.jar
 
 cd $HOME
 
-sudo docker build -t 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-server .
+sudo docker build -t 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-spring-boot .
 
-sudo docker tag 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-server:latest 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-server:${date}_${IMAGE_TAG}
+sudo docker tag 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-spring-boot:latest 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-spring-boot:${date}_${IMAGE_TAG}
 
-sudo docker push 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-server:latest
+sudo docker push 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-spring-boot:latest
 
-sudo docker push 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-server:${date}_$IMAGE_TAG
+sudo docker push 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-spring-boot:${date}_$IMAGE_TAG
 
-sudo docker rmi -f 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-server:${date}_$IMAGE_TAG
+sudo docker rmi -f 688559712485.dkr.ecr.us-west-1.amazonaws.com/galaxy-spring-boot:${date}_$IMAGE_TAG
 
 
 
