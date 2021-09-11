@@ -21,3 +21,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### application.properties for hiding keys ###
+src/main/resources/application.properties
