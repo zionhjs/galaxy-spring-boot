@@ -3,7 +3,7 @@ HOME=/home/ec2-user
 
 WORK=/home/ec2-user/jar
 
-NAME=galaxy-spring-boot
+NAME=galaxy-spring-boot-1.0.0
 
 IMAGE_TAG=$(echo $RANDOM)
 
