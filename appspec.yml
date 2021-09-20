@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: ./galaxy-spring-boot-0.0.1-SNAPSHOT.jar
+  - source: ./galaxy-spring-boot.jar
     destination: /home/ec2-user/jar
 hooks:
   ApplicationStop:
