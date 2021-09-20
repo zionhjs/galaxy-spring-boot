@@ -19,7 +19,7 @@ phases:
 
 artifacts:
   files:
-    - 'target/galaxy-spring-boot-0.0.1-SNAPSHOT.jar'
+    - 'target/galaxy-spring-boot-1.0.0.jar'
     - 'src/main/resources/application.yml'
     - 'appspec.yml'
     - 'deploy/check.sh'
